@@ -69,7 +69,12 @@ Rails.application.configure do
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
+
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
+  # config.file_watcher = ActiveSupport::FileUpdateChecker -- what I tried with mentor
+
+  config.reload_classes_only_on_change = true
+  #  config.reload_classes_only_on_change = false --- what I set with mentor to try
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
