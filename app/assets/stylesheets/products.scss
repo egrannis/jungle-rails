@@ -28,6 +28,7 @@ main section.categories-show {
         padding: 0.375rem 0.75rem;
         font-size: 1rem;
         border-radius: 0.25rem;
+        cursor: default;
       }
 
       a {
@@ -52,6 +53,11 @@ main section.categories-show {
         button {
           background: white;
           color: rgba(0, 130, 29, 0.7);
+        }
+        .soldout {
+          cursor: default;
+          color: rgba(224, 14, 14, 0.8);
+          background: white;
         }
       }
       img {
