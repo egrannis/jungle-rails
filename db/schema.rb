@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_062916) do
     t.integer "total_price_cents"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["order_id"], name: "index_line_items_on_order_id"
+    t.index ["order_id"], name: "index_line_items_on_order_id" #indexing, which makes queries faster to do
     t.index ["product_id"], name: "index_line_items_on_product_id"
   end
 
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 2021_06_26_062916) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
-  add_foreign_key "line_items", "orders"
+  add_foreign_key "line_items", "orders" #removal of FK creation from within the create_table makes order matter less
   add_foreign_key "line_items", "products"
   add_foreign_key "products", "categories"
 end

@@ -1,6 +1,5 @@
 class Admin::CategoriesController < ApplicationController
 
-
 # basic user authenticiation with creds in .env file
   http_basic_authenticate_with name: ENV['ADMIN_NAME'], password: ENV['ADMIN_PASSWORD']
 
@@ -9,11 +8,11 @@ def index
   end
 
   def new
-    @product = Category.new
+    @category = Category.new
   end
 
   def create
-    @product = Category.new(category_params)
+    @category = Category.new(category_params)
 
     if @category.save
       redirect_to [:admin, :categories], notice: 'Category created!'
@@ -24,10 +23,12 @@ def index
 
   private
 
-  def product_params
+  def category_params
     params.require(:category).permit(
       :name,
     )
   end
 
 end
+
+#byebug --> can use this anywhere in your code to get the code to stop within it (except views). Controllers or methods within models
