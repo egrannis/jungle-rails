@@ -13,6 +13,9 @@
 
   <%= render 'layouts/top_nav' %>
 
+  <%= if current_user %>
+    <div> Logged in as: <%= current_user.first_name %> <%= current_user.last_name %> </div>
+
   <main class="container">
     <%= yield %>
   </main>
