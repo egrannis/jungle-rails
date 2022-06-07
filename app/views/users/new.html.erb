@@ -1,0 +1,36 @@
+<section class="session-new">
+
+  <header class="page-header">
+    <h1> Register </h1>
+  </header>
+  
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-1">
+    <%= form_for :user, url: '/users' do |form| %>
+        <div class="form-group">
+          <div>First Name: </div>
+          <div> <%= form.text_field :first_name %></div>
+        </div>
+        <div class="form-group">
+          <div>Last Name: </div>
+          <div> <%= form.text_field :last_name %></div>
+        </div>
+        <div class="form-group">
+          <div>Email: </div>
+          <div> <%= form.text_field :email %></div>
+        </div>
+        <div class="form-group">  
+          <div>Password: </div>
+          <div><%= form.password_field :password %></div>
+        </div>
+        <div class="form-group">  
+          <div>Password Confirmation: </div>
+          <div><%= form.password_field :password_confirmation %></div>
+        </div>
+        <div class="form-group mt-4">          
+          <%= form.submit 'Submit', class: 'btn btn-primary' %>    
+        </div>  
+      <% end %>
+    </div>
+  </div>           
+</section>
