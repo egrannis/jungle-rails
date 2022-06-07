@@ -20,11 +20,11 @@ Rails.application.routes.draw do
   end
 
   # user authentication
-  resources :users, only: [:new, :create]
-  get '/signup', to: 'users#new'
-  post '/users', to: 'users#create'
+  resources :users, only: [:new, :create] #allow rails to create restful routes /users/new(.:format)
+  # get '/signup', to: 'users#new'
+  # post '/users', to: 'users#create'
 
-  #useer sign in
+  #user sign in
   resources :sessions, only: [:new, :create, :destroy]
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
