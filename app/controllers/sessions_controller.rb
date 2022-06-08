@@ -3,8 +3,6 @@ class SessionsController < ApplicationController
   end
 
   def create
-  def create
-
     # If the user exists AND the password entered is correct.
     # user = User.find_by_email(params[:email])
 
