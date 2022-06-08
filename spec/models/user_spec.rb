@@ -1,4 +1,4 @@
-require rails_helper;
+require 'rails_helper';
 
 RSpec.describe User, type: :model do
 
@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
     # It must be created with a password and password_confirmation fields
     it 'should create a User if all of the fields are correctly filled in' do
-      @user1 = User.new(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abc", password_confirmation: "abc")
+      @user1 = User.new(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
       expect(@user1).to be_valid
     end
 
@@ -21,7 +21,7 @@ RSpec.describe User, type: :model do
 
     # Passwords need to match so you should have an example for where they are not the same
     it 'should validate that a password matches its password_confirmation' do
-      @user= User.new(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password:"abcd", password_confirmation:"abcdefg")
+      @user= User.new(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password:"abcdefgh", password_confirmation:"abcdefg")
       expect(@user).to_not be_valid 
     end
 
@@ -44,53 +44,24 @@ RSpec.describe User, type: :model do
 
     # The password must have a minimum length when a user account is being created
     it 'should validate that a password is above a minimum length' do
-      @user= User.new(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"1", password_confirmation:"1")
-      expect(@user).to_not be_valid
+      @user1 = User.new(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"a", password_confirmation:"a")
+      expect(@user1).to_not be_valid
+    end
+
+    # Email should be able to have spaces bordering and it still pass
+    it 'should log the user in even if the email contains spaces' do
+      @user1 = User.create(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
+      authenticate = User.authenticate_with_credentials(" emma@email.com  ", "abcdefgh")
+      expect(authenticate).to be_valid
     end
 
     # Email, first name, and last name should also be required
   describe '.authenticate_with_credentials' do
-    it 'should validate user authentication with name and password' do
-      @user = User.create(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"123456", password_confirmation:"123456")
-      authenticate = User.authenticate_with_credentials(@user.email, @user.password)
-      expect(authenticate).to_not be_valid
+    it 'should validate user authentication with proper name and password' do
+      @user1 = User.create(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"abcdefgh", password_confirmation:"abcdefgh")
+      authenticate = User.authenticate_with_credentials('email@test.com','abcdefgh')
+      expect(authenticate).to be_valid
       end
-    end
-  end
-end
-
-
-
-
-RSpec.describe User, type: :model do
-  describe 'Validations' do
-    
-   
-  describe '.authenticate_with_credentials' do
-    it 'should log the user in if the credentials are correct' do
-      @user = User.new(first_name: "John", last_name: "Smith", email: "johnny123@gmail.com", password: "ABCDEF", password_confirmation: "ABCDEF")
-      @user.save!
-      expect(User.authenticate_with_credentials("johnny123@gmail.com", "ABCDEF")).to be_present
-    end
-    it 'should not log the user in if the email is wrong' do
-      @user = User.new(first_name: "John", last_name: "Smith", email: "johnny123@gmail.com", password: "ABCDEF", password_confirmation: "ABCDEF")
-      @user.save!
-      expect(User.authenticate_with_credentials("johnny1234@gmail.com", "ABCDEF")).not_to be_present
-    end
-    it 'should not log the user in if the password is wrong' do
-      @user = User.new(first_name: "John", last_name: "Smith", email: "johnny123@gmail.com", password: "ABCDEF", password_confirmation: "ABCDEF")
-      @user.save!
-      expect(User.authenticate_with_credentials("johnny123@gmail.com", "ABCDEFG")).not_to be_present
-    end
-    it 'should log the user in even if the email contains spaces' do
-      @user = User.new(first_name: "John", last_name: "Smith", email: "johnny1234@gmail.com", password: "ABCDEF", password_confirmation: "ABCDEF")
-      @user.save!
-      expect(User.authenticate_with_credentials("  johnny1234@gmail.com   ", "ABCDEF")).to be_present
-    end
-    it 'should log the user in even if the email is typed with a different case' do
-      @user = User.new(first_name: "John", last_name: "Smith", email: "johnny1234@gmail.com", password: "ABCDEF", password_confirmation: "ABCDEF")
-      @user.save!
-      expect(User.authenticate_with_credentials("  JOHNNY1234@gmail.com   ", "ABCDEF")).to be_present
     end
   end
 end

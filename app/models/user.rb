@@ -1,21 +1,18 @@
 class User < ApplicationRecord
 
   has_secure_password # suggested approach from compass
+
+  validates :password, length: { minimum: 6 }, presence: true
+  validates :password_confirmation, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :email, presence: true, :uniqueness => {case_sensitive: false}
+
+  def self.authenticate_with_credentials(email, password)
+    clean_email = email.downcase.strip
+    self.find_by(email: clean_email)&.authenticate(password) ## look up &. on stack overflow when time
+  end
 end
-
-
-
-  # validates :password, presence: true, length: { minimum: 3 }
-  # validates :password_confirmation, presence: true
-  # validates :first_name, presence: true
-  # validates :last_name, presence: true
-  # validates :email, presence: true, uniqueness: true
-
-  # def self.authenticate_with_credentials(email, password)
-  #   lower_email = email.downcase
-  #   user = User.find_by(email: lower_email)
-  #   user && user.authenticate(password) 
-
 
 #Passwords should be stored as hashed strings instead of plain text so that no one can know what they are. 
 #During registration, users must supply a password as well as password_confirmation. 
