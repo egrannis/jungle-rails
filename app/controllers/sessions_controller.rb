@@ -3,10 +3,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-  
-    user = User.find_by_email(params[:email])
+  def create
 
-    if user && user.authenticate(params[:password]) 
+    # If the user exists AND the password entered is correct.
+    # user = User.find_by_email(params[:email])
+
+    #if user && user.authenticate(params[:password])
+    if user = User.authenticate_with_credentials(params[:email].strip, params[:password])
       # Save the user id inside the browser cookie. This is how we keep the user 
       # logged in when they navigate around our website.
       session[:user_id] = user.id
@@ -22,3 +25,4 @@ class SessionsController < ApplicationController
     redirect_to '/login'
   end
 end
+
