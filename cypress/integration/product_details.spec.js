@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 describe('Product Details', () => {
   it('visits the homepage', () => {
     //visit homepage
@@ -10,5 +11,10 @@ describe('Product Details', () => {
       .click();
 
     cy.contains('.product-detail', 'Add');
+
+    it('.click() - Can click on a product', () => {
+      cy.get('article img').first().click();
+    });
+
   });
 });
