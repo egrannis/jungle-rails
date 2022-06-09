@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def create #create is a POST
     user = User.new(user_params) #want to keep DB clean, so separate out new and save. Also can account for other preferences
-  
+
     if user.save #method to save user.new is successful - true 
       session[:user_id] = user.id
       redirect_to '/'
