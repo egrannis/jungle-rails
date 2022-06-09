@@ -10,6 +10,6 @@ describe('First test', () => {
   });
 
   it("There is products on the page", () => {
-    cy.get(".products article").should("have.length", 2);
+    cy.get(".products article").should("have.length", 12);
   });
 });
