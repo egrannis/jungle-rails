@@ -10,7 +10,6 @@ class User < ApplicationRecord
 
   def self.authenticate_with_credentials(email, password)
     clean_email = email.downcase.strip
-    byebug
     user = User.find_by_email(clean_email) 
     if user && user.authenticate(password)
       return user

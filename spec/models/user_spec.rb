@@ -63,10 +63,26 @@ RSpec.describe User, type: :model do
       authenticatedUser = User.authenticate_with_credentials('  email@test.com  ','abcdefgh')
       expect(@user1).to eq(authenticatedUser) 
       end
+    
+    # test for case sensitivity of email
+    it 'should return the user even if email has capitalizations in it differing from DB' do
+      @user1 = User.create!(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"abcdefgh", password_confirmation:"abcdefgh")
+      authenticatedUser = User.authenticate_with_credentials('eMAil@test.com','abcdefgh')
+      expect(@user1).to eq(authenticatedUser) 
+      end 
+    # test if user does not EXIST - search user database with an email not present, make sure returns nil
+    it 'should return nil if the user does not exist in the DB' do
+      authenticatedUser = User.authenticate_with_credentials('nouser@email.com','abcdefgh')
+      expect(authenticatedUser).to eq(nil)
+      end 
+
+    # test if email is in DB, but PW is wrong - should return nil
+    it 'should return nil if the user does not exist in the DB' do
+      @user1 = User.create!(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"abcdefgh", password_confirmation:"abcdefgh")
+      authenticatedUser = User.authenticate_with_credentials('email@test.com','abcdefghijklmnop')
+      expect(authenticatedUser).to eq(nil)
+      end 
+
     end
   end
 end
-
-# test for case sensitivity of email
-# test if user does not EXIST - search user database with an email not present, make sure returns nil
-# test if email is in DB, but PW is wrong - should return nil
