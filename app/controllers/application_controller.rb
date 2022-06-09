@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  # Inside actioncontroller::base, builds params so that any controller that inherits from applicationcontroller
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   

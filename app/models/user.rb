@@ -10,9 +10,15 @@ class User < ApplicationRecord
 
   def self.authenticate_with_credentials(email, password)
     clean_email = email.downcase.strip
-    self.find_by(email: clean_email)&.authenticate(password) ## look up &. on stack overflow when time
+    byebug
+    user = User.find_by_email(clean_email) 
+    if user && user.authenticate(password)
+      return user
+    end
+      nil
   end
 end
+
 
 #Passwords should be stored as hashed strings instead of plain text so that no one can know what they are. 
 #During registration, users must supply a password as well as password_confirmation. 

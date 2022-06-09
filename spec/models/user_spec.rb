@@ -7,7 +7,7 @@ RSpec.describe User, type: :model do
 
     # It must be created with a password and password_confirmation fields
     it 'should create a User if all of the fields are correctly filled in' do
-      @user1 = User.new(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
+      @user1 = User.create!(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
       expect(@user1).to be_valid
     end
 
@@ -48,20 +48,25 @@ RSpec.describe User, type: :model do
       expect(@user1).to_not be_valid
     end
 
+
+  describe '.authenticate_with_credentials' do
     # Email should be able to have spaces bordering and it still pass
-    it 'should log the user in even if the email contains spaces' do
-      @user1 = User.create(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
-      authenticate = User.authenticate_with_credentials(" emma@email.com  ", "abcdefgh")
-      expect(authenticate).to be_valid
+    it 'should return the user if it exists in the database and PW is correct' do
+      @user1 = User.create!(first_name: "Emma", last_name: "Grannis", email: "emma@email.com", password: "abcdefgh", password_confirmation: "abcdefgh")
+      authenticatedUser = User.authenticate_with_credentials("emma@email.com", "abcdefgh")
+      expect(@user1).to eq(authenticatedUser) 
     end
 
     # Email, first name, and last name should also be required
-  describe '.authenticate_with_credentials' do
-    it 'should validate user authentication with proper name and password' do
-      @user1 = User.create(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"abcdefgh", password_confirmation:"abcdefgh")
-      authenticate = User.authenticate_with_credentials('email@test.com','abcdefgh')
-      expect(authenticate).to be_valid
+    it 'should return the user even if trailing and preceding whitespace in email' do
+      @user1 = User.create!(first_name: "Emma", last_name: "Grannis", email: "email@test.com", password:"abcdefgh", password_confirmation:"abcdefgh")
+      authenticatedUser = User.authenticate_with_credentials('  email@test.com  ','abcdefgh')
+      expect(@user1).to eq(authenticatedUser) 
       end
     end
   end
 end
+
+# test for case sensitivity of email
+# test if user does not EXIST - search user database with an email not present, make sure returns nil
+# test if email is in DB, but PW is wrong - should return nil
