@@ -1,25 +1,25 @@
+/* eslint-disable no-undef */
 describe('Product Details', () => {
-  it('visits the homepage', () => {
-    //visit homepage
-    cy.visit('http://0.0.0.0:3000');
+  beforeEach(() => {
+    cy.visit('/');
   });
 
-  it('should add a product from homepage', () => {
-    cy.get(".end-0").should(
-      // wow this chainer was super hard to find (should > assertions)
-      'include.text',
-      'My Cart (0)'
-    );
+  it("Loads the home page", () => {
+    cy.visit('/');
+  });
 
-    cy.get('.btn')
-      .first()
-      .click({ force: true });
+  it("There is products on the page", () => {
+    cy.get(".products article").should("be.visible");
+  });
 
-    cy.get(".end-0").should(
-      // wow this chainer was super hard to find (should > assertions)
-      'include.text',
-      'My Cart (1)'
-    );
+  it("There is 2 products on the page", () => {
+    cy.get(".products article").should("have.length", 2);
+  });
 
+  it("Should increase the cart count by 1 when user clicks add to cart", () => {
+    cy.get('a[href="/cart"]').should('contain', 'My Cart (0)');
+    cy.get('.button_to').first().submit();
+    cy.get('a[href="/cart"]').should('contain', 'My Cart (1)');
   });
 });
+
