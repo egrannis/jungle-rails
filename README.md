@@ -33,4 +33,4 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 ## Screenshots
 ![header](https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/home-page-header-jungle.png)
 ![view my cart](https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/my-cart-jungle.png)
-![admin view - all products](https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/admin%20all%20products%20-%20jungle.png_
+![admin view - all products](https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/admin%20all%20products%20-%20jungle.png)
