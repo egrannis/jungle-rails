@@ -1,6 +1,6 @@
 # Jungle
 
-A mini e-commerce application built with Rails 6.1 for purposes of teaching Rails by example.
+A mini e-commerce application built with Rails 6.1 in order to teach Rails by example. This project's purpose was to simulate a real-world environment in which an existing code base is inherited and bug fixes and feature modifications are needed. 
 
 ## Setup
 
@@ -29,3 +29,8 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 - Bootstrap 5
 - PostgreSQL 9.x
 - Stripe
+
+## Screenshots
+![header] (https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/home-page-header-jungle.png)
+![view my cart] (https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/my-cart-jungle.png)
+![admin view - all products] (https://github.com/egrannis/jungle-rails/blob/ddf8db0e86a81cfc0d6270c9367b3f6168bbdf93/docs/admin%20all%20products%20-%20jungle.png_
